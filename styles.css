@@ -1,0 +1,35 @@
+#map {
+    height: 90vh; /* Fullscreen map */
+}
+.tool-bar {
+    display: flex;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.tool-bar button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: #f0f0f5;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 18px;
+}
+.tool-bar button:hover {
+    background: #e0e0eb;
+    transform: scale(1.1);
+}
+.tool-bar button:active {
+    transform: scale(0.95);
+}
+.tool-bar button i {
+    color: #333;
+}
