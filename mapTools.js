@@ -21,9 +21,9 @@ class MapEditor {
         this.drawMode = null;
 
         this.map.on('click', this.HandleMapClick.bind(this));
-        this.map.on('mouseup', this.HandleMapClick.bind(this));
-        this.map.on('mousedown', this.HandleMapClick.bind(this));
-        this.map.on('mousemove', this.HandleMapClick.bind(this));
+        this.map.on('mouseup', this.HandleMouseUp.bind(this));
+        this.map.on('mousedown', this.HandleMouseDown.bind(this));
+        this.map.on('mousemove', this.HandleMouseMove.bind(this));
 
         this.SetupButtons();
     }
@@ -49,11 +49,18 @@ class MapEditor {
         });
     }
 
+    HandleClick(e) {}
+    HandleMouseUp(e) {}
+    HandleMouseDown(e) {}
+    HandleMouseMove(e) {}
 
     HandleMapClick(e) {
         switch (this.drawMode) {
             case DrawMode.Point:
                 var m = L.marker(e.latlng).addTo(this.map);
+                L.DomEvent.on(m, 'click', function (ev) {
+                    L.DomEvent.stopPropagation(ev);
+                });
                 //m.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
                 break;
             case DrawMode.Line:
@@ -80,7 +87,7 @@ class MapEditor {
                 break;
         }
 
-        this.drawMode = null;
+        //this.drawMode = null;
     }
 }
 
