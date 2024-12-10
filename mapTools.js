@@ -15,12 +15,12 @@ class MapEditor {
 
         this.map = L.map('map').setView([51.505, -0.09], 13);
         googleSat.addTo(this.map);
-        this.map.locate({setView: true, maxZoom: 16});
+        this.map.locate({ setView: true, maxZoom: 16 });
 
 
         this.drawMode = null;
 
-        this.map.on('click', this.HandleMapClick.bind(this));
+        this.map.on('click', this.HandleClick.bind(this));
         this.map.on('mouseup', this.HandleMouseUp.bind(this));
         this.map.on('mousedown', this.HandleMouseDown.bind(this));
         this.map.on('mousemove', this.HandleMouseMove.bind(this));
@@ -29,30 +29,46 @@ class MapEditor {
     }
 
     SetupButtons() {
+        document.getElementById('tool_view').addEventListener('click', () => {
+            this.UpdateButtonStyle('tool_view');
+            this.drawMode = null;
+        });
+        
         document.getElementById('tool_point').addEventListener('click', () => {
+            this.UpdateButtonStyle('tool_point');
             this.drawMode = DrawMode.Point;
         });
+
         document.getElementById('tool_line').addEventListener('click', () => {
+            this.UpdateButtonStyle('tool_line');
             this.drawMode = DrawMode.Line;
         });
+
         document.getElementById('tool_circle').addEventListener('click', () => {
+            this.UpdateButtonStyle('tool_circle');
             this.drawMode = DrawMode.Circle;
         });
+
         document.getElementById('tool_rect').addEventListener('click', () => {
+            this.UpdateButtonStyle('tool_rect');
             this.drawMode = DrawMode.Rect;
         });
+
         document.getElementById('tool_shape').addEventListener('click', () => {
-            this.drawMode =  DrawMode.Shape;
+            this.UpdateButtonStyle('tool_shape');
+            this.drawMode = DrawMode.Shape;
         });
+
         document.getElementById('tool_pencil').addEventListener('click', () => {
+            this.UpdateButtonStyle('tool_pencil');
             this.drawMode = DrawMode.Pencil;
         });
     }
 
-    HandleClick(e) {}
-    HandleMouseUp(e) {}
-    HandleMouseDown(e) {}
-    HandleMouseMove(e) {}
+    HandleClick(e) { }
+    HandleMouseUp(e) { }
+    HandleMouseDown(e) { }
+    HandleMouseMove(e) { }
 
     HandleMapClick(e) {
         switch (this.drawMode) {
@@ -88,6 +104,16 @@ class MapEditor {
         }
 
         //this.drawMode = null;
+    }
+
+    UpdateButtonStyle(selectedButtonId) {
+        const buttons = document.querySelectorAll('.tool-bar button');
+        buttons.forEach(button => {
+            button.classList.remove('selected');
+        });
+
+        const selectedButton = document.getElementById(selectedButtonId);
+        selectedButton.classList.add('selected');
     }
 }
 
