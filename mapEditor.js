@@ -93,12 +93,3 @@ class MapEditor {
 document.addEventListener('DOMContentLoaded', function () {
     const editor = new MapEditor();
 });
-
-const DrawMode = {
-    Point: 'point',
-    Line: 'line',
-    Circle: 'circle',
-    Rect: 'rect',
-    Shape: 'shape',
-    Pencil: 'pencil',
-};
